@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    body {
+        text-align: center;
+        display: flex;
+        justify-content: center;
+    }
+
+    .form {
+        width: 100%;
+        max-width: 600px;
+    }
+
+    .item {
+        padding: 1rem 2rem;
+    }
+
+    input {
+        padding: 1rem;
+        border-radius: 10px;
+    }
+
+    label {
+        /*padding: 1rem;*/
+        float: left;
+    }
+</style>
+<body>
+<div class="form">
+    <form th:action="@{/edit}" method="post" th:object="${product}">
+        <div class="item">
+            <label for="id"> ID</label>
+            <input id="id" th:field="*{id}" th:value="${product.id}" >
+        </div>
+
+        <div class="item">
+            <label for="name">name</label>
+            <input id="name" th:field="*{name}" th:value="${product.name}">
+        </div>
+        <div class="item">
+            <label for="price">price</label>
+            <input id="price" th:field="*{price}" type="number" th:value="${product.price}">
+        </div>
+        <div class="item">
+            <label for="description">description</label>
+            <input id="description" th:field="*{description}" th:value="${product.price}">
+        </div>
+
+
+        <label for="producer">producer</label>
+        <input id="producer" th:field="*{producer}" th:value="${product.producer}">
+        <input type="submit" value="submit">
+    </form>
+</div>
+</body>
+</html>

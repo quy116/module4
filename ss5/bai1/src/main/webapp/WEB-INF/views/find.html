@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+  body {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    text-align: center;
+    color: #ffcb22;
+    background-color: black;
+    /*display: flex;*/
+    /*justify-content: center;*/
+  }
+  a{
+    text-decoration: none;
+  }
+  th{
+    color: aqua;
+  }
+  tr{
+    background-color: #ffcb22;
+    border: 1px #ffcb22;
+  }
+
+  th, td {
+    padding: 2rem;
+    color: black;
+  }
+
+  .list{
+    display: flex;
+    justify-content: center;
+  }
+</style>
+<body>
+<table>
+  <tr>
+    <th>STT</th>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Price</th>
+    <th>description</th>
+    <th>producer</th>
+  </tr>
+  <tr th:each="Productlist,status: ${product}">
+    <td th:text="${status.count}"></td>
+    <td th:text="${Productlist.id}"></td>
+    <td th:text="${Productlist.name}"></td>
+    <td th:text="${Productlist.price}"></td>
+    <td th:text="${Productlist.description}"></td>
+    <td th:text="${Productlist.producer}"></td>
+  </tr>
+</table>
+</body>
+</html>
