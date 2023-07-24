@@ -30,10 +30,10 @@
 <body>
 <div class="form">
     <form action="create" method="post" th:object="${product}">
-        <div class="item">
-            <label for="id">add ID</label>
-            <input th:field="*{id}" id="id">
-        </div>
+<!--        <div class="item">-->
+<!--            <label for="id">add ID</label>-->
+<!--            <input th:field="*{id}" id="id">-->
+<!--        </div>-->
 
         <div class="item">
             <label for="name">add name</label>
@@ -49,7 +49,7 @@
         </div>
 
 
-        <label for="id">add producer</label>
+        <label for="producer">add producer</label>
         <input th:field="*{producer}" id="producer">
         <input type="submit" value="submit">
     </form>
