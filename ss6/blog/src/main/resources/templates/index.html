@@ -43,6 +43,7 @@
             <th>img</th>
             <th>name</th>
             <th>content</th>
+            <th>category</th>
             <th>date</th>
             <th>author</th>
             <th>delete</th>
@@ -51,14 +52,17 @@
         <div class="content" th:each="lists: ${list}">
             <tr>
                 <td class="content-left">
-                    <img src="https://cdn.vntrip.vn/cam-nang/wp-content/uploads/2017/09/villa-2.jpg" height="100"
+                    <img th:src="${lists.img}" height="100"
                          width="200"/>
                 </td>
                 <td class="content-right">
                     <div th:text="${lists.name}"></div>
                 </td>
                 <td class="content-right"  >
-                    <div style="overflow: auto;height: 5rem; width: 34rem"  th:text="${lists.content}"></div>
+                    <div th:text="${#strings.abbreviate(lists.content, 12)}"></div>
+                </td>
+                <td class="content-right">
+                    <div th:text="${lists.category.name}"></div>
                 </td>
                 <td class="content-right">
                     <div th:text="${lists.date}"></div>
@@ -84,6 +88,12 @@
         <input type="text" th:field="*{img}">
         author
         <input type="text" th:field="*{author}">
+        category
+        <select th:field="*{category}" >
+            <option value="" >the loat</option>
+            <option th:each=" cate : ${category}" th:value="${cate.id}" th:text="${cate.name}"></option>
+
+        </select>
         date
         <input type="text" th:field="*{date}">
         content

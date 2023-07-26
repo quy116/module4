@@ -15,6 +15,11 @@
         <input type="text" th:field="*{img}">
         author
         <input type="text" th:field="*{author}">
+        <select th:field="*{category}" >
+            <option value="" >the loat</option>
+            <option th:each=" cate : ${category}" th:value="${cate.id}" th:text="${cate.name}"></option>
+
+        </select>
         date
         <input type="text" th:field="*{date}">
         content
