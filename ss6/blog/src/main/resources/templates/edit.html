@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="create" style="margin-top: 10rem">
+    <h1>create</h1>
+    <form method="post" th:action="@{/edit}" th:object="${blog}">
+        <input type="hidden" th:field="*{id}">
+        name
+        <input type="text" th:field="*{name}">
+        img
+        <input type="text" th:field="*{img}">
+        author
+        <input type="text" th:field="*{author}">
+        date
+        <input type="text" th:field="*{date}">
+        content
+        <input type="text" th:field="*{content}">
+        <button>them</button>
+    </form>
+</div>
+</body>
+</html>

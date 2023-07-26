@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <style>
+        .divbig {
+            text-align: center;
+        }
+
+        .content {
+           width: 20rem;
+        }
+
+        img {
+            width: 10rem;
+            height: 10rem;
+            /*width: 100%;*/
+        }
+        td,th{
+            padding: 2rem;
+        }
+        a{
+            text-decoration: none;
+            color: #ffcb22;
+        }
+        table{
+            color: white;
+            background-color: black;
+            width: 100%;
+        }
+        /*.content-right {*/
+        /*    display: block;*/
+        /*}*/
+    </style>
+</head>
+<body>
+<div class="table table-striped">
+    <table>
+        <tr>
+            <th>img</th>
+            <th>name</th>
+            <th>content</th>
+            <th>date</th>
+            <th>author</th>
+            <th>delete</th>
+            <th>edit</th>
+        </tr>
+        <div class="content" th:each="lists: ${list}">
+            <tr>
+                <td class="content-left">
+                    <img src="https://cdn.vntrip.vn/cam-nang/wp-content/uploads/2017/09/villa-2.jpg" height="100"
+                         width="200"/>
+                </td>
+                <td class="content-right">
+                    <div th:text="${lists.name}"></div>
+                </td>
+                <td class="content-right"  >
+                    <div style="overflow: auto;height: 5rem; width: 34rem"  th:text="${lists.content}"></div>
+                </td>
+                <td class="content-right">
+                    <div th:text="${lists.date}"></div>
+                </td>
+                <td class="content-right">
+                    <div th:text="${lists.author}"></div>
+                </td>
+                <td>  <a th:href="@{/delete(id=${lists.getId()})}">delete</a></td>
+                <td>  <a th:href="@{/showEdit(id=${lists.getId()})}">edit</a></td>
+            </tr>
+
+        </div>
+    </table>
+    <a href=""><i class="fa-solid fa-angles-right"></i></a>
+</div>
+
+<div class="create" style="margin-top: 10rem">
+    <h1>create</h1>
+    <form method="post" th:action="@{create}" th:object="${blog}">
+        name
+        <input type="text" th:field="*{name}">
+        img
+        <input type="text" th:field="*{img}">
+        author
+        <input type="text" th:field="*{author}">
+        date
+        <input type="text" th:field="*{date}">
+        content
+        <input type="text" th:field="*{content}">
+        <button>them</button>
+    </form>
+</div>
+
+</div>
+
+</body>
+</html>
