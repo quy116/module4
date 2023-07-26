@@ -27,8 +27,8 @@
             color: #ffcb22;
         }
         table{
-            color: white;
-            background-color: black;
+            /*color: white;*/
+            /*background-color: black;*/
             width: 100%;
         }
         /*.content-right {*/
@@ -37,6 +37,11 @@
     </style>
 </head>
 <body>
+<form method="get" th:action="@{showList}">
+    name
+    <input type="text" th:name="search">
+    <button>them</button>
+</form>
 <div class="table table-striped">
     <table>
         <tr>
@@ -49,7 +54,7 @@
             <th>delete</th>
             <th>edit</th>
         </tr>
-        <div class="content" th:each="lists: ${list}">
+        <div class="content" th:each="lists, status:${blogPage}">
             <tr>
                 <td class="content-left">
                     <img th:src="${lists.img}" height="100"
@@ -58,12 +63,15 @@
                 <td class="content-right">
                     <div th:text="${lists.name}"></div>
                 </td>
-                <td class="content-right"  >
-                    <div th:text="${#strings.abbreviate(lists.content, 12)}"></div>
-                </td>
                 <td class="content-right">
-                    <div th:text="${lists.category.name}"></div>
+                    <div th:text="${lists.content}"></div>
                 </td>
+                <td class="content-right"  >
+                    <span th:if="${lists.category != null}" th:text="${lists.category.name}">...</span>
+                </td>
+<!--                <td class="content-right">-->
+<!--                    <div th:text="${lists.category.name}"></div>-->
+<!--                </td>-->
                 <td class="content-right">
                     <div th:text="${lists.date}"></div>
                 </td>
@@ -73,9 +81,11 @@
                 <td>  <a th:href="@{/delete(id=${lists.getId()})}">delete</a></td>
                 <td>  <a th:href="@{/showEdit(id=${lists.getId()})}">edit</a></td>
             </tr>
-
         </div>
     </table>
+    <a th:if="${blogPage.hasPrevious()}" th:href="@{showList(page=${blogPage.number-1},search=${search})}" >Prev</a>
+    <span th:text="${blogPage.number+1}"></span>/<span th:text="${blogPage.totalPages}"> </span>
+    <a th:if="${blogPage.hasNext()}" th:href="@{showList(page=${blogPage.number+1},search=${search})}">Next</a>
     <a href=""><i class="fa-solid fa-angles-right"></i></a>
 </div>
 

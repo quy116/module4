@@ -7,11 +7,13 @@ import org.springframework.data.domain.Pageable;
 import java.util.List;
 
 public interface IBlogService {
-    Page<Blog> showList(Pageable pageable,String name);
+    Page<Blog> showList(Pageable pageable, String search);
+
     void add(Blog blog);
 
     void deleteFindId(int id);
 
     Blog editfindId(Integer id);
+
     void edit(Blog blog);
 }
