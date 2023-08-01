@@ -7,6 +7,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class BlogService implements IBlogService {
     @Autowired
@@ -18,6 +20,11 @@ public class BlogService implements IBlogService {
     @Override
     public Page<Blog> showList(Pageable pageable, String search) {
         return iBlogRepository.findBlogByNameContaining(pageable, search);
+    }
+
+    @Override
+    public List<Blog> list() {
+        return iBlogRepository.findAll();
     }
 
     @Override

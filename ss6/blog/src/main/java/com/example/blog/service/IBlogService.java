@@ -8,6 +8,7 @@ import java.util.List;
 
 public interface IBlogService {
     Page<Blog> showList(Pageable pageable, String search);
+    List<Blog> list();
 
     void add(Blog blog);
 
