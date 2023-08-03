@@ -10,4 +10,5 @@ import java.util.Optional;
 public interface IBlogRepository extends JpaRepository<Blog, Integer> {
     Optional<Blog> findById(Integer id);
     Page<Blog> findBlogByNameContaining(Pageable pageable, String name);
+
 }
