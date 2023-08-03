@@ -7,6 +7,9 @@
 </head>
 <body>
 <table>
+    <input type="text" class="name" value="" />
+    <button type="button" onclick="find()">find</button>
+
     <tr>
         <th>stt</th>
         <th>name</th>
@@ -42,7 +45,28 @@
     })
         ;
     }
-
+    const find = () => {
+        let name = $(".name").val();
+        let content = "";
+        $.ajax({
+            contentType: "application/json",
+            method: "GET",
+            dataType: "json",
+            url: "http://localhost:8080/api/findName?name=" + name,
+            success: function (data) {
+                for (let i = 0; i < data.length; i++) {
+                    content += `<tr>
+        <td>${i + 1}</td>
+        <td>${data[i].name}</td>
+        <td>${data[i].category.name}</td>
+        <td>${data[i].date}</td>
+        <td>${data[i].author}</td>
+      </tr>`;
+                }
+                $(".content").html(content);
+            },
+        });
+    };
     display();
 </script>
 </html>
