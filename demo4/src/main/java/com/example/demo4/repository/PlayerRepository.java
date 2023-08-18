@@ -2,70 +2,66 @@ package com.example.demo4.repository;
 
 import com.example.demo4.model.PlayerSoccer;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import java.util.ArrayList;
 import java.util.List;
 
 @Repository
 public class PlayerRepository implements IPlayerRepository {
-    private static List<PlayerSoccer> soccerList = new ArrayList<>();
-    static {
-        soccerList.add(new PlayerSoccer(1, "001", "Nguyen Phuc Quy", "11-06-2000", "10 nam", "coach", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnH0vyD3L439yMWtlGJ0nPQEXxhTwGOuOToA&usqp=CAU"));
-        soccerList.add(new PlayerSoccer(2, "001", "Nguyen Phuc Quy", "11-06-2000", "10 nam", "coach", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnH0vyD3L439yMWtlGJ0nPQEXxhTwGOuOToA&usqp=CAU"));
-        soccerList.add(new PlayerSoccer(3, "001", "Nguyen Phuc Quy", "11-06-2000", "10 nam", "coach", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnH0vyD3L439yMWtlGJ0nPQEXxhTwGOuOToA&usqp=CAU"));
-        soccerList.add(new PlayerSoccer(4, "001", "Nguyen Phuc Quy", "11-06-2000", "10 nam", "coach", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnH0vyD3L439yMWtlGJ0nPQEXxhTwGOuOToA&usqp=CAU"));
-        soccerList.add(new PlayerSoccer(5, "001", "Nguyen Phuc Quy", "11-06-2000", "10 nam", "coach", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnH0vyD3L439yMWtlGJ0nPQEXxhTwGOuOToA&usqp=CAU"));
-    }
+    @PersistenceContext
+    private EntityManager entityManager;
 
     @Override
     public List<PlayerSoccer> showList() {
-        return soccerList;
+        TypedQuery<PlayerSoccer> query = entityManager.createQuery("from PlayerSoccer", PlayerSoccer.class);
+        return query.getResultList();
     }
 
+    @Transactional
     @Override
     public void delete(int id) {
-        for (int i = 0; i < soccerList.size(); i++) {
-            if (soccerList.get(i).getId()== id){
-                soccerList.remove(i);
-            }
-        }
+        PlayerSoccer playerSoccer1 = finByIdEdit(id);
+        entityManager.remove(playerSoccer1);
     }
 
     @Override
     public List<PlayerSoccer> findById(int id) {
         List<PlayerSoccer> list = new ArrayList<>();
-        for (int i = 0; i < soccerList.size(); i++) {
-            if (soccerList.get(i).getId()== id){
-                list.add(showList().get(i));
-            }
-        }
+        PlayerSoccer playerSoccer = entityManager.find(PlayerSoccer.class, id);
+        list.add(playerSoccer);
         return list;
     }
-
+    @Transactional
     @Override
     public void add(PlayerSoccer playerSoccer) {
-        soccerList.add(playerSoccer);
+        try {
+            entityManager.persist(playerSoccer);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
     }
 
     @Override
     public PlayerSoccer finByIdEdit(int id) {
-        PlayerSoccer playerSoccer = new PlayerSoccer();
-        for (int i = 0; i < soccerList.size(); i++) {
-            if (soccerList.get(i).getId()== id){
-                playerSoccer =soccerList.get(i);
-                return playerSoccer;
-            }
-        }
-        return null;
+        PlayerSoccer playerSoccer = entityManager.find(PlayerSoccer.class, id);
+        return playerSoccer;
     }
-
+    @Transactional
     @Override
     public void edit(PlayerSoccer playerSoccer) {
-        for (int i = 0; i < soccerList.size(); i++) {
-            if (soccerList.get(i).getId()== playerSoccer.getId()){
-               soccerList.set(i,playerSoccer);
-            }
-        }
+        PlayerSoccer playerSoccer1 = finByIdEdit(playerSoccer.getId());
+        playerSoccer1.setCode(playerSoccer.getCode());
+        playerSoccer1.setFullName(playerSoccer.getFullName());
+        playerSoccer1.setDate(playerSoccer.getDate());
+        playerSoccer1.setExperience(playerSoccer.getExperience());
+        playerSoccer1.setImg(playerSoccer.getImg());
+        playerSoccer1.setPosition(playerSoccer.getPosition());
+        entityManager.merge(playerSoccer1);
     }
 
 

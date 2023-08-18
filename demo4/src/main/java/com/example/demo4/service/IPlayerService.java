@@ -16,5 +16,5 @@ public interface IPlayerService {
 
     PlayerSoccer edit(int id);
 
-    void editTwo(PlayerSoccer playerSoccer);
+    void editTwo(PlayerSoccer playerSoccer,int id);
 }

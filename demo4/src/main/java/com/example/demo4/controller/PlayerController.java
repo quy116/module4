@@ -55,7 +55,7 @@ public class PlayerController {
     }
     @PostMapping("edit")
     public String edit(PlayerSoccer playerSoccer) {
-        iPlayerService.editTwo(playerSoccer);
+        iPlayerService.editTwo(playerSoccer, playerSoccer.getId());
         return "redirect:/";
     }
 }

@@ -39,7 +39,7 @@ public class PlayerService implements IPlayerService {
     }
 
     @Override
-    public void editTwo(PlayerSoccer playerSoccer) {
+    public void editTwo(PlayerSoccer playerSoccer,int id) {
         repository.edit(playerSoccer);
     }
 }

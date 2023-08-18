@@ -1,6 +1,14 @@
 package com.example.demo4.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class PlayerSoccer {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String code;
     private String fullName;
@@ -14,6 +22,15 @@ public class PlayerSoccer {
 
     public PlayerSoccer(int id, String code, String fullName, String date, String experience, String position, String img) {
         this.id = id;
+        this.code = code;
+        this.fullName = fullName;
+        this.date = date;
+        this.experience = experience;
+        this.position = position;
+        this.img = img;
+    }
+
+    public PlayerSoccer(String code, String fullName, String date, String experience, String position, String img) {
         this.code = code;
         this.fullName = fullName;
         this.date = date;
