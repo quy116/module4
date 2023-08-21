@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body>
+<div th:insert="until::header"></div>
+<a th:href="@{/showCreate}" >them moi ne </a>
+<table>
+    <tr>
+<!--        <th>STT</th>-->
+        <th>mã cầu thủ</th>
+        <th>họ và tên</th>
+        <th>ngày sinh</th>
+        <th>kinh nghiệm</th>
+        <th>ví trí</th>
+        <th>ảnh</th>
+        <th>chức năng</th>
+    </tr>
+    <tr th:each="item, status : ${list}">
+<!--        <td th:text="${status.count}"></td>-->
+        <td th:text="${item.code}"></td>
+        <td th:text="${item.fullName}"></td>
+        <td th:text="${item.date}"></td>
+        <td th:text="${item.experience}"></td>
+        <td th:text="${item.position}"></td>
+        <td><img th:src="${item.img}" alt=""></td>
+        <td><a th:href="@{delete(id=${item.id})}">Delete</a></td>
+        <td><a th:href="@{detail(id=${item.id})}">xem chi tiet</a></td>
+        <td><a th:href="@{showEdit(id=${item.id})}">chinh sua~</a></td>
+    </tr>
+</table>
+<a th:if="${list.hasPrevious()}" th:href="@{/(page=${list.number-1})}">Prev</a>
+<span th:text="${list.number+1}"></span>/
+<span th:text="${list.totalPages}"></span>
+<a th:if="${list.hasNext()}" th:href="@{/(page=${list.number+1})}">Prev</a>
+<div th:replace="until::footer"></div>
+<form action="/" method="get">
+    <div>thay doi so luong cua trang</div>
+    <input th:value="2" th:name="size">
+    <input type="submit">
+
+</form>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</html>
