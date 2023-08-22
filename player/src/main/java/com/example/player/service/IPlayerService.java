@@ -3,7 +3,6 @@ import com.example.player.model.PlayerSoccer;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import java.util.List;
 import java.util.Optional;
 
 public interface IPlayerService {
@@ -11,7 +10,7 @@ public interface IPlayerService {
 
     void delete(int id);
 
-    PlayerSoccer findById(int id);
+    Optional<PlayerSoccer> findById(int id);
 
     void add(PlayerSoccer playerSoccer);
 

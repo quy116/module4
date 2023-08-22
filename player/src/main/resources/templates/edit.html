@@ -16,6 +16,9 @@
   <input th:field="*{date}" type="text"  >
   experience
   <input th:field="*{experience}" type="text"  >
+  <select th:field="*{team.id}" class="form-select" id="inputGroupSelect01"  >
+    <option th:each="type: ${team}" th:value="${type.id}" th:text="${type.name}"></option>
+  </select>
   position
   <input th:field="*{position}" type="text" >
   img

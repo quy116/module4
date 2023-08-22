@@ -15,6 +15,7 @@
         <th>họ và tên</th>
         <th>ngày sinh</th>
         <th>kinh nghiệm</th>
+        <th>team</th>
         <th>ví trí</th>
         <th>ảnh</th>
         <th>chức năng</th>
@@ -25,6 +26,7 @@
         <td th:text="${item.fullName}"></td>
         <td th:text="${item.date}"></td>
         <td th:text="${item.experience}"></td>
+        <td th:text="${item.team.name}"></td>
         <td th:text="${item.position}"></td>
         <td><img th:src="${item.img}" alt=""></td>
         <td><a th:href="@{delete(id=${item.id})}">Delete</a></td>
