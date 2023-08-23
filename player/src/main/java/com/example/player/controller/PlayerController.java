@@ -89,7 +89,8 @@ public class PlayerController {
     }
 
     @GetMapping("showEdit")
-    public String showEdit(@RequestParam int id, Model model) {
+    public String showEdit(
+            @RequestParam int id, Model model) {
         PlayerSoccer playerSoccer = iPlayerService.edit(id);
         model.addAttribute("playerSoccer", playerSoccer);
         model.addAttribute("team", iTeamService.ShowTeam());
@@ -98,8 +99,17 @@ public class PlayerController {
     }
 
     @PostMapping("edit")
-    public String edit(PlayerSoccer playerSoccer) {
-        iPlayerService.editTwo(playerSoccer, playerSoccer.getId());
+    public String edit(@Valid @ModelAttribute("playerSoccer") Dto playerSoccer,BindingResult bindingResult,Model model) {
+        new Dto().validate(playerSoccer, bindingResult);
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("player", playerSoccer);
+            model.addAttribute("team", iTeamService.ShowTeam());
+            model.addAttribute("list", iPositionService.list());
+            return "edit";
+        }
+        PlayerSoccer playerSoccer1 = new PlayerSoccer();
+        BeanUtils.copyProperties(playerSoccer, playerSoccer1);
+        iPlayerService.editTwo(playerSoccer1, playerSoccer.getId());
         return "redirect:/";
     }
 }

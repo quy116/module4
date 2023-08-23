@@ -8,6 +8,7 @@ import org.springframework.validation.Validator;
 import javax.validation.constraints.*;
 
 public class Dto implements Validator {
+    private int id;
     @NotBlank(message = "hello")
     private String code;
     @Size(min = 5,max = 100,message = "nhập 5 đến 100 ký tự")
@@ -24,6 +25,16 @@ public class Dto implements Validator {
     public Dto() {
     }
 
+    public Dto(int id, String code, String fullName, String date, String experience, String img, Team team, Position position) {
+        this.id = id;
+        this.code = code;
+        this.fullName = fullName;
+        this.date = date;
+        this.experience = experience;
+        this.img = img;
+        this.team = team;
+        this.position = position;
+    }
 
     public Dto(String code, String fullName, String date, String experience, String img, Team team, Position position) {
         this.code = code;
@@ -33,6 +44,14 @@ public class Dto implements Validator {
         this.img = img;
         this.team = team;
         this.position = position;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getCode() {
