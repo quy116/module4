@@ -27,21 +27,21 @@
         <td th:text="${item.date}"></td>
         <td th:text="${item.experience}"></td>
         <td th:text="${item.team.name}"></td>
-        <td th:text="${item.position}"></td>
+        <td th:text="${item.position.name}"></td>
         <td><img th:src="${item.img}" alt=""></td>
         <td><a th:href="@{delete(id=${item.id})}">Delete</a></td>
         <td><a th:href="@{detail(id=${item.id})}">xem chi tiet</a></td>
         <td><a th:href="@{showEdit(id=${item.id})}">chinh sua~</a></td>
     </tr>
 </table>
-<a th:if="${list.hasPrevious()}" th:href="@{/(page=${list.number-1})}">Prev</a>
+<a th:if="${list.hasPrevious()}" th:href="@{/(page=${list.number-1},size=${size})}">Prev</a>
 <span th:text="${list.number+1}"></span>/
 <span th:text="${list.totalPages}"></span>
-<a th:if="${list.hasNext()}" th:href="@{/(page=${list.number+1})}">Prev</a>
+<a th:if="${list.hasNext()}" th:href="@{/(page=${list.number+1},size=${size})}">next</a>
 <div th:replace="until::footer"></div>
 <form action="/" method="get">
     <div>thay doi so luong cua trang</div>
-    <input th:value="2" th:name="size">
+    <input  th:value="${size}" name="size">
     <input type="submit">
 
 </form>

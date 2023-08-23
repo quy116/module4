@@ -1,29 +1,31 @@
-package com.example.player.model;
+package com.example.player.dto;
 
-import javax.persistence.*;
+import com.example.player.model.Position;
+import com.example.player.model.Team;
+import org.springframework.validation.Errors;
+import org.springframework.validation.Validator;
 
-@Entity
-public class PlayerSoccer {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+import javax.validation.constraints.*;
+
+public class Dto implements Validator {
+    @NotBlank(message = "hello")
     private String code;
+    @Size(min = 5,max = 100,message = "nhập 5 đến 100 ký tự")
     private String fullName;
+    @Min(value = 16,message = "lớn hơn 16")
     private String date;
+    @Pattern(regexp = "^[1-9]\\d*$", message = "là số nguyên dương")
     private String experience;
     //    private String position;
     private String img;
-    @ManyToOne
-    @JoinColumn(name = "team_id", referencedColumnName = "id")
     private Team team;
-    @ManyToOne
-    @JoinColumn(name = "position_id", referencedColumnName = "id")
     private Position position;
 
-    public PlayerSoccer() {
+    public Dto() {
     }
 
-    public PlayerSoccer(String code, String fullName, String date, String experience, String img, Team team, Position position) {
+
+    public Dto(String code, String fullName, String date, String experience, String img, Team team, Position position) {
         this.code = code;
         this.fullName = fullName;
         this.date = date;
@@ -31,14 +33,6 @@ public class PlayerSoccer {
         this.img = img;
         this.team = team;
         this.position = position;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getCode() {
@@ -95,5 +89,15 @@ public class PlayerSoccer {
 
     public void setPosition(Position position) {
         this.position = position;
+    }
+
+    @Override
+    public boolean supports(Class<?> clazz) {
+        return false;
+    }
+
+    @Override
+    public void validate(Object target, Errors errors) {
+
     }
 }
