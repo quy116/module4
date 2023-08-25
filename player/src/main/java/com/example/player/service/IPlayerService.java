@@ -6,7 +6,7 @@ import org.springframework.data.domain.Pageable;
 import java.util.Optional;
 
 public interface IPlayerService {
-    Page<PlayerSoccer> showListService(Pageable pageable);
+     Page<PlayerSoccer> showListService(Pageable pageable);
 
     void delete(int id);
 

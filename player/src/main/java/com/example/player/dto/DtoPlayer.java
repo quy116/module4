@@ -1,13 +1,14 @@
 package com.example.player.dto;
 
 import com.example.player.model.Position;
+import com.example.player.model.Status;
 import com.example.player.model.Team;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
 import javax.validation.constraints.*;
 
-public class Dto implements Validator {
+public class DtoPlayer implements Validator {
     private int id;
     @NotBlank(message = "hello")
     private String code;
@@ -21,11 +22,12 @@ public class Dto implements Validator {
     private String img;
     private Team team;
     private Position position;
+    private Status status;
 
-    public Dto() {
+    public DtoPlayer() {
     }
 
-    public Dto(int id, String code, String fullName, String date, String experience, String img, Team team, Position position) {
+    public DtoPlayer(int id, String code, String fullName, String date, String experience, String img, Team team, Position position, Status status) {
         this.id = id;
         this.code = code;
         this.fullName = fullName;
@@ -34,9 +36,10 @@ public class Dto implements Validator {
         this.img = img;
         this.team = team;
         this.position = position;
+        this.status = status;
     }
 
-    public Dto(String code, String fullName, String date, String experience, String img, Team team, Position position) {
+    public DtoPlayer(String code, String fullName, String date, String experience, String img, Team team, Position position, Status status) {
         this.code = code;
         this.fullName = fullName;
         this.date = date;
@@ -44,6 +47,7 @@ public class Dto implements Validator {
         this.img = img;
         this.team = team;
         this.position = position;
+        this.status = status;
     }
 
     public int getId() {
@@ -108,6 +112,14 @@ public class Dto implements Validator {
 
     public void setPosition(Position position) {
         this.position = position;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
     }
 
     @Override

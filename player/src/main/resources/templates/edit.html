@@ -26,6 +26,10 @@
   <select th:field="*{position.id}" class="form-select" id=""  >
     <option th:each="type: ${list}" th:value="${type.id}" th:text="${type.name}"></option>
   </select>
+  <select th:field="*{status.id}" class="form-select" id=""  >
+    <option th:each="type: ${status}" th:value="${type.id}" th:text="${type.name}"></option>
+  </select>
+
   img
   <input th:field="*{img}" type="text" >
   <input type="submit">

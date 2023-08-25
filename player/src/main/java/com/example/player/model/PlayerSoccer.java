@@ -19,11 +19,15 @@ public class PlayerSoccer {
     @ManyToOne
     @JoinColumn(name = "position_id", referencedColumnName = "id")
     private Position position;
+    @ManyToOne
+    @JoinColumn(name = "status_id", referencedColumnName = "id")
+    private Status status;
 
     public PlayerSoccer() {
     }
 
-    public PlayerSoccer(String code, String fullName, String date, String experience, String img, Team team, Position position) {
+    public PlayerSoccer(int id, String code, String fullName, String date, String experience, String img, Team team, Position position, Status status) {
+        this.id = id;
         this.code = code;
         this.fullName = fullName;
         this.date = date;
@@ -31,7 +35,20 @@ public class PlayerSoccer {
         this.img = img;
         this.team = team;
         this.position = position;
+        this.status = status;
     }
+
+    public PlayerSoccer(String code, String fullName, String date, String experience, String img, Team team, Position position, Status status) {
+        this.code = code;
+        this.fullName = fullName;
+        this.date = date;
+        this.experience = experience;
+        this.img = img;
+        this.team = team;
+        this.position = position;
+        this.status = status;
+    }
+
 
     public int getId() {
         return id;
@@ -95,5 +112,17 @@ public class PlayerSoccer {
 
     public void setPosition(Position position) {
         this.position = position;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
+    public boolean isStatus() {
+        return true;
     }
 }

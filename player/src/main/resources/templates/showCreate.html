@@ -25,6 +25,10 @@
     <select th:field="*{position}" class="form-select" id=""  >
         <option th:each="type: ${list}" th:value="${type.id}" th:text="${type.name}"></option>
     </select>
+    <select th:field="*{status}" class="form-select" id=""  >
+        <option th:each="type: ${status}" th:value="${type.id}" th:text="${type.name}"></option>
+    </select>
+
 <!--    team-->
 <!--    <input th:field="*{team.name}" type="text">-->
 <!--    position-->
