@@ -19,8 +19,9 @@ public class PlayerService implements IPlayerService {
     }
 
     @Override
-    public void delete(int id) {
+    public boolean delete(int id) {
         repository.deleteById(id);
+        return true;
     }
 
     @Override

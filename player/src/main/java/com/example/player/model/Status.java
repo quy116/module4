@@ -1,5 +1,7 @@
 package com.example.player.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.util.Set;
 @Entity
@@ -8,6 +10,7 @@ public class Status {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
+    @JsonBackReference
     @OneToMany(mappedBy = "status")
     private Set<PlayerSoccer> playerSoccerSet;
 

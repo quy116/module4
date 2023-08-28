@@ -8,7 +8,7 @@ import java.util.Optional;
 public interface IPlayerService {
      Page<PlayerSoccer> showListService(Pageable pageable);
 
-    void delete(int id);
+    boolean delete(int id);
 
     Optional<PlayerSoccer> findById(int id);
 
